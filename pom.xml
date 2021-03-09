@@ -31,17 +31,18 @@
 	</licenses>
 
 	<inceptionYear>2021</inceptionYear>
-    	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
-		<relativePath />
+		<version>2.4.3</version>
+		<relativePath/>
 	</parent>
 	
 	<properties>
 		<java.version>11</java.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
+		<start-class>io.zahori.process.ZahoriProcessApp</start-class>
 
 		<license.licenseName>agpl_v3</license.licenseName>
 		<license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
@@ -64,74 +65,21 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.codehaus.woodstox</groupId>
-				<artifactId>stax2-api</artifactId>
-				<version>4.2</version>
+				<groupId>io.zahori</groupId>
+				<artifactId>zahori-framework</artifactId>
+				<version>0.1.3-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>io.zahori</groupId>
+				<artifactId>zahori-model</artifactId>
+				<version>0.1.3</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>14.0.1</version>
+				<version>25.0-jre</version>
 			</dependency>
-
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-core</artifactId>
-				<version>1.19.1</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-client</artifactId>
-				<version>1.19.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.fasterxml.woodstox</groupId>
-				<artifactId>woodstox-core</artifactId>
-				<version>5.3.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.netflix.servo</groupId>
-				<artifactId>servo-core</artifactId>
-				<version>0.5.3</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-netflix-eureka-server</artifactId>
-				<version>3.0.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-autoconfigure</artifactId>
-				<version>2.4.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-commons</artifactId>
-				<version>3.0.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>5.3.3</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-beans</artifactId>
-				<version>5.3.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot</artifactId>
-				<version>2.4.2</version>
-			</dependency>
-
-
 
 			<dependency>
 				<groupId>org.ow2.asm</groupId>
@@ -188,21 +136,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>io.zahori</groupId>
-				<artifactId>zahori-framework</artifactId>
-				<version>0.1.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>io.zahori</groupId>
-				<artifactId>zahori-model</artifactId>
-				<version>0.1.3</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.30</version>
+				<groupId>com.netflix.servo</groupId>
+				<artifactId>servo-core</artifactId>
+				<version>0.12.21</version>
 			</dependency>
 
 			<dependency>
@@ -214,38 +150,57 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-    
-	<dependencies>
-        
-        <dependency>
-		    <groupId>io.zahori</groupId>
-		    <artifactId>zahori-framework</artifactId>
-        </dependency>
 
+
+	<dependencies>
+		<dependency>
+			<groupId>io.zahori</groupId>
+			<artifactId>zahori-framework</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.zahori</groupId>
 			<artifactId>zahori-model</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
-		<!--
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
 
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>-->
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -253,42 +208,16 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-commons</artifactId>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-		</dependency>
-		
-        <!-- This module provide variety of options like Auto Restart of the server, 
-            Live Reload, etc. useful for the faster development. -->
-<!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>-->
-
 	</dependencies>
+
 
 	<build>
 		<finalName>app</finalName>
@@ -349,6 +278,7 @@
 					<environmentVariables>
 						<DOCKER_TAG>${project.version}</DOCKER_TAG>
 					</environmentVariables>
+					<mainClass>${start-class}</mainClass>
 				</configuration>
 				<executions>
 					<execution>
@@ -374,7 +304,7 @@
 						</tags>
 					</to>
 					<container>
-						<mainClass>io.zahori.process.ZahoriProcessApp</mainClass>
+						<mainClass>${start-class}</mainClass>
 						<ports>
 							<port>9090</port>
 						</ports>
