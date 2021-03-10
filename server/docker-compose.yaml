@@ -18,14 +18,14 @@ services:
      - POSTGRES_USER=${ZAHORI_DB_ADMIN_USER}
      - POSTGRES_PASSWORD=${ZAHORI_DB_ADMIN_PASS}
     volumes:
-     - ${PWD}/database/postgres-data:/var/lib/postgresql/data
+     - ./database/postgres-data:/var/lib/postgresql/data
 
   flyway:
     image: flyway/flyway:6.3.1
     command: -locations=filesystem:/flyway/sql -url=jdbc:postgresql://${ZAHORI_DB_HOST}:${ZAHORI_DB_PORT}/${ZAHORI_DB_NAME} -user=${ZAHORI_DB_ADMIN_USER} -password=${ZAHORI_DB_ADMIN_PASS} -placeholders.zahori_db_user=${ZAHORI_DB_USER} -placeholders.zahori_db_pass=${ZAHORI_DB_PASS} -baselineOnMigrate="false" -connectRetries=60 migrate
     network_mode: "host"
     volumes:
-      - ${PWD}/database/sql_versions:/flyway/sql
+      - ./database/sql_versions:/flyway/sql
     depends_on:
       - database
 
@@ -47,7 +47,7 @@ services:
      - ZAHORI_SELENOID_UI_HOST=${ZAHORI_SELENOID_UI_HOST}
      - ZAHORI_SELENOID_UI_PORT=${ZAHORI_SELENOID_UI_PORT}
     volumes:
-     - ${PWD}/evidences:/usr/app/evidences
+     - ./evidences:/usr/app/evidences
     depends_on:
      - flyway
      - eureka-server
@@ -69,10 +69,10 @@ services:
     ports:
       - "${ZAHORI_SELENOID_PORT}:4444"
     volumes:
-      - "${PWD}/selenoid/config:/etc/selenoid/" # assumed current dir contains browsers.json
+      - "./selenoid/config:/etc/selenoid/" # assumed current dir contains browsers.json
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "${PWD}/selenoid/config/video:/opt/selenoid/video"
-      - "${PWD}/selenoid/config/logs:/opt/selenoid/logs"
+      - "./selenoid/config/video:/opt/selenoid/video"
+      - "./selenoid/config/logs:/opt/selenoid/logs"
     environment:
       - OVERRIDE_VIDEO_OUTPUT_DIR=selenoid/config/video
     command: ["-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video", "-log-output-dir", "/opt/selenoid/logs", "-limit", "5"]
