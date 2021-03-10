@@ -52,7 +52,7 @@ public class SearchProcess extends ZahoriProcess {
         testContext.logStepPassedWithScreenshot("Load Bing page");
 
         BingPage bing = new BingPage(testContext);
-        // bing.acceptCookies();
+        bing.acceptCookies();
 
         bing.search(searchText);
         testContext.logStepPassedWithScreenshot("Search finished!");

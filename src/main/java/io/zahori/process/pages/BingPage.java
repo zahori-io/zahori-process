@@ -37,7 +37,7 @@ public class BingPage extends Page {
 
     public void acceptCookies() {
         PageElement acceptCookies = new PageElement(this, "Accept cookies", Locator.id("bnp_btn_accept"));
-        if (acceptCookies.isVisibleWithoutWait()) {
+        if (acceptCookies.isVisible()) {
             acceptCookies.click();
             testContext.logStepPassedWithScreenshot("Accept cookies");
         }
