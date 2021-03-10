@@ -43,6 +43,7 @@
 		<java.version>11</java.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
 		<start-class>io.zahori.process.ZahoriProcessApp</start-class>
+		<slf4j.version>1.7.30</slf4j.version>
 
 		<license.licenseName>agpl_v3</license.licenseName>
 		<license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
