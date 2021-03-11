@@ -1,0 +1,98 @@
+= Zahorí Process Doc
+:revdate: {docdate}
+:toc: left
+:toclevels: 3
+:sectnums:
+:sectanchors:
+:Author: Zahori Panel Team
+:revnumber: latest
+:icons: font
+:source-highlighter: coderay
+:docinfo: shared
+
+This reference for version: _{revnumber}_
+
+
+== Guía de Inicio Rápido
+
+* Guía de Inicio rápida para realizar una puesta en marcha del entorno de desarrollo de Procesos de Zahorí.io
+
+=== Windows
+* La documentación se ha validado con Windows 10 64 bits.
+
+==== Instalación de la herramienta de control de versiones (GIT):
+* Descarga la aplicación en según el sistema de tu sistema operativo (64 / 32 bits) en el siguiente enlace-> https://git-scm.com/download/win
+
+image::images/GIT/00_GIT.PNG[title="Descarga Git"]
+
+* Ejecuta el archivo descargado y pulsa Next:
+
+image::images/GIT/01_WIZARD00.PNG[title="Instalación Git Paso 1"]
+
+* Deja las opciones por defecto y pulsa Next:
+
+image::images/GIT/01_WIZARD01.PNG[title="Instalación Git Paso 2"]
+
+* Marcamos el check Lauch Git Bash defecto y pulsamos Finish:
+
+image::images/GIT/01_WIZARD03.PNG[title="Instalación Git Paso 3"]
+
+* Una vez abierta la consola nos identificamos con nuestros datos de usuario y correo electrónico escribiendo en la consola de Git Bash:
+
++
+----
+$ git config --global user.name "Mi Usuario"
+$ git config --global user.email "micorreoelectronico"
+----
++
+
+image::images/GIT/01_WIZARD05.PNG[title="Instalación Git Paso 4"]
+
+
+==== Instalación de JDK y Maven:
+
+* Abrimos Git Bash e introducimos:
+
++
+----
+$ curl -s "https://get.sdkman.io" | bash
+----
++
+
+* Instalamos el jdk:
++
+----
+$  sdk install java 11.0.10.hs-adpt
+----
++
+
+* Instalamos Maven:
++
+----
+$  sdk install maven
+----
++
+
+* Configuramos las variables de entorno, pulsando Windows + R y escribiendo sysdm.cpl:
+
+image::images/EnVar/02_PROPIEDADES_SISTEMA.PNG[title="Configuración variables de entorno Paso 1"]
+
+* Añadimos una nueva variables de Sistema Pulsando en Variables del sistema en el botón Nueva
+
+image::images/EnVar/02_VARIABLES_ENTORNO_VAR_ADD.PNG[title="Configuración variables de entorno Paso 2"]
+
+* Añadimos la variable con el valor del JDk previamente instalado (C:\Users\tunombredeusuario\.sdkman\candidates\java\current)
+
+image::images/EnVar/02_VARIABLES_ENTORNO_JAVA_HOME.PNG[title="Configuración variables de entorno Paso 3"]
+
+* Añadimos la variable con el valor de Maven previamente instalado (C:\Users\tunombredeusuario\.sdkman\candidates\maven\current)
+
+image::images/EnVar/02_VARIABLES_ENTORNO_M3_HOME.PNG[title="Configuración variables de entorno Paso 4"]
+
+* Añadimos las variables JAVA_HOME y M3_HOME al Path. Seleccionamos en Variables del sistema Path y pulsamos en Editar
+
+image::images/EnVar/02_VARIABLES_ENTORNO_PATH.PNG[title="Configuración variables de entorno Paso 5"]
+
+* Pulsamos en nuevo e introducimos %JAVA_HOME%\bin y %M3_HOME%\bin quedando como en la siguiente imagen:
+
+image::images/EnVar/02_VARIABLES_ENTORNO_PATH_ADD.PNG[title="Configuración variables de entorno Paso 5"]
