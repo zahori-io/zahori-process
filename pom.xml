@@ -68,7 +68,7 @@
 			<dependency>
 				<groupId>io.zahori</groupId>
 				<artifactId>zahori-framework</artifactId>
-				<version>0.1.3</version>
+				<version>0.1.4</version>
 			</dependency>
 			<dependency>
 				<groupId>io.zahori</groupId>
@@ -315,7 +315,7 @@
 					<container>
 						<mainClass>${start-class}</mainClass>
 						<ports>
-							<port>9090</port>
+							<port>9091</port>
 						</ports>
 						<jvmFlags>
 							<jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
