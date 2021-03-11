@@ -30,10 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.zahori.framework.core.TestContext;
 import io.zahori.model.process.CaseExecution;
 import io.zahori.process.framework.ZahoriProcess;
-import io.zahori.process.pages.BingPage;
+import io.zahori.process.pages.WikipediaPage;
 
 @RestController
-public class SearchProcess extends ZahoriProcess {
+public class SearchWikipedia extends ZahoriProcess {
 
     /*
      * Warning! Do not declare any variables here, values are overwritten when
@@ -45,16 +45,19 @@ public class SearchProcess extends ZahoriProcess {
 
         // Read case data
         Map<String, String> data = caseExecution.getCas().getDataMap();
+        String language = data.get("Language");
         String searchText = data.get("Search");
 
         // Load page
-        testContext.getBrowser().loadPage("http://www.bing.com");
-        testContext.logStepPassedWithScreenshot("Load Bing page");
+        testContext.getBrowser().loadPage("https://www.wikipedia.org/");
+        testContext.logStepPassedWithScreenshot("Load Wikipedia page");
 
-        BingPage bing = new BingPage(testContext);
-        bing.acceptCookies();
+        WikipediaPage wiki = new WikipediaPage(testContext);
 
-        bing.search(searchText);
+        wiki.selectLanguage(language);
+        testContext.logStepPassedWithScreenshot("Select language '" + language + "'");
+
+        wiki.search(searchText);
         testContext.logStepPassedWithScreenshot("Search finished!");
     }
 }
