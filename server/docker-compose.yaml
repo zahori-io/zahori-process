@@ -5,25 +5,28 @@ services:
     image: zahoriaut/eureka-server:0.1.2
     ports: 
       - "${ZAHORI_EUREKA_PORT}:8761"
-    network_mode: "host"
+    network_mode: bridge
 
   database:
     image: postgres:12.2-alpine
     restart: always
     ports:
       - "${ZAHORI_DB_PORT}:5432"
-    network_mode: "host"
+    network_mode: bridge
     environment:
      - POSTGRES_DB=${ZAHORI_DB_NAME}
      - POSTGRES_USER=${ZAHORI_DB_ADMIN_USER}
      - POSTGRES_PASSWORD=${ZAHORI_DB_ADMIN_PASS}
     volumes:
-     - ./database/postgres-data:/var/lib/postgresql/data
+#     - ./database/postgres-data:/var/lib/postgresql/data
+     - zahori-database:/var/lib/postgresql/data
 
   flyway:
     image: flyway/flyway:6.3.1
     command: -locations=filesystem:/flyway/sql -url=jdbc:postgresql://${ZAHORI_DB_HOST}:${ZAHORI_DB_PORT}/${ZAHORI_DB_NAME} -user=${ZAHORI_DB_ADMIN_USER} -password=${ZAHORI_DB_ADMIN_PASS} -placeholders.zahori_db_user=${ZAHORI_DB_USER} -placeholders.zahori_db_pass=${ZAHORI_DB_PASS} -baselineOnMigrate="false" -connectRetries=60 migrate
-    network_mode: "host"
+    network_mode: bridge
+    links:
+      - database
     volumes:
       - ./database/sql_versions:/flyway/sql
     depends_on:
@@ -33,7 +36,11 @@ services:
     image: zahoriaut/zahori-server:0.1.0
     ports:
       - "${ZAHORI_SERVER_PORT}:${ZAHORI_SERVER_PORT}"
-    network_mode: "host"
+    network_mode: bridge
+    links:
+      - database
+      - eureka-server
+      - selenoid-ui
     environment:
      - ZAHORI_SERVER_PORT=${ZAHORI_SERVER_PORT}
      - ZAHORI_DB_HOST=${ZAHORI_DB_HOST}
@@ -51,6 +58,7 @@ services:
     depends_on:
      - flyway
      - eureka-server
+     - selenoid-ui
 
   chrome86:
     image: "selenoid/vnc_chrome:86.0"
@@ -79,11 +87,15 @@ services:
 
   selenoid-ui:
     image: "aerokube/selenoid-ui"
-    network_mode: bridge
-    links:
-      - selenoid
     ports:
       - "${ZAHORI_SELENOID_UI_PORT}:8080"
     command: ["--selenoid-uri", "http://selenoid:${ZAHORI_SELENOID_PORT}", "--allowed-origin", "*"]
+    depends_on:
+     - selenoid
+    network_mode: bridge
+    links:
+      - selenoid
 
-
+volumes:
+  zahori-database:
+    external: true
