@@ -55,9 +55,9 @@ public class SearchWikipedia extends ZahoriProcess {
         WikipediaPage wiki = new WikipediaPage(testContext);
 
         wiki.selectLanguage(language);
-        testContext.logStepPassedWithScreenshot("Select language '" + language + "'");
+        testContext.logStepPassedWithScreenshot("Select language: {0}", language);
 
         wiki.search(searchText);
-        testContext.logStepPassedWithScreenshot("Search finished!");
+        testContext.logStepPassedWithScreenshot("Search: {0}", searchText);
     }
 }
