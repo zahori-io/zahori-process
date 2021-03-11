@@ -13,21 +13,11 @@ public class WikipediaPage extends Page {
     }
 
     public void selectLanguage(String language) {
-        //        WebElement languageElement = testContext.driver.findElement(By.xpath("//a/strong[contains(text(),'" + language + "')]"));
-        //        languageElement.click();
-        /////
-        PageElement languageElement2 = new PageElement(this, "Language selector", Locator.xpath("//a/strong[contains(text(),\"" + language + "\")]"));
-        languageElement2.click();
+        PageElement languageLink = new PageElement(this, "Language selector", Locator.xpath("//a/strong[contains(text(),\"" + language + "\")]"));
+        languageLink.click();
     }
 
     public void search(String textToSearch) {
-        //        WebElement searchField = testContext.driver.findElement(By.id("searchInput"));
-        //        searchField.sendKeys(textToSearch);
-        //
-        //        WebElement searchButton = testContext.driver.findElement(By.id("searchButton"));
-        //        searchButton.sendKeys(textToSearch);
-
-        /////
         PageElement searchField = new PageElement(this, "Search field", Locator.id("searchInput"));
         searchField.write(textToSearch);
 
