@@ -12,46 +12,68 @@
 
 This reference for version: _{revnumber}_
 
+[cols=2*,options="header"]
+.Requisitos del Entorno de Desarrollo Ubuntu 20.04 LTS
+|===
+|Nombre Aplicación
+|Version
+
+|git
+|2.25.1
+
+|jdk
+|11.0.10.j9-adpt
+
+|maven
+|3.6.3
+
+|Docker
+|20.10.5
+
+|docker-compose
+|1.25.0
+|===
 
 == Guía de Inicio Rápido
 
-* Guía de Inicio rápida para realizar una puesta en marcha del entorno de desarrollo de Procesos de Zahorí.io
+* Con el objetivo de facilitar la puesta en marcha del entorno dedicado al desarrollo de procesos con Zahori.io hemos documentado como hemos instalado nuestro entorno. Puedes tomarlo como guía y adaptarlo a tus gustos y necesidades, espero que te resulte útil ;-)
 
-=== Windows
-* La documentación se ha validado con Windows 10 64 bits.
+=== Linux
+* La documentación se ha validado con Ubuntu 20.04.2 LTS 64 bits.
 
 ==== Instalación de la herramienta de control de versiones (GIT):
-* Descarga la aplicación en según el sistema de tu sistema operativo (64 / 32 bits) en el siguiente enlace-> https://git-scm.com/download/win
+* En esta distribución suele venir git instalado. Abrimos un terminal y comprobamos si está instalado:
 
-image::images/GIT/00_GIT.PNG[title="Descarga Git"]
++
+----
+$ git --version
+  git version 2.25.1
+----
++
 
-* Ejecuta el archivo descargado y pulsa Next:
+* En el caso de que no devuelva versión:
++
+----
+$ sudo apt update && apt install git
+----
++
 
-image::images/GIT/01_WIZARD00.PNG[title="Instalación Git Paso 1"]
-
-* Deja las opciones por defecto y pulsa Next:
-
-image::images/GIT/01_WIZARD01.PNG[title="Instalación Git Paso 2"]
-
-* Marcamos el check Lauch Git Bash defecto y pulsamos Finish:
-
-image::images/GIT/01_WIZARD03.PNG[title="Instalación Git Paso 3"]
-
-* Una vez abierta la consola nos identificamos con nuestros datos de usuario y correo electrónico escribiendo en la consola de Git Bash:
+* Ya tenemos git instalado, procedemos a identificamos con nuestros datos de usuario y correo electrónico escribiendo en el terminal:
 
 +
 ----
 $ git config --global user.name "Mi Usuario"
+----
++
+----
 $ git config --global user.email "micorreoelectronico"
 ----
 +
 
-image::images/GIT/01_WIZARD05.PNG[title="Instalación Git Paso 4"]
-
 
 ==== Instalación de JDK y Maven:
 
-* Abrimos Git Bash e introducimos:
+* Abrimos un terminal e introducimos:
 
 +
 ----
@@ -62,37 +84,110 @@ $ curl -s "https://get.sdkman.io" | bash
 * Instalamos el jdk:
 +
 ----
-$  sdk install java 11.0.10.hs-adpt
+$ sdk install java 11.0.10.hs-adpt
 ----
 +
 
 * Instalamos Maven:
 +
 ----
-$  sdk install maven
+$ sdk install maven
 ----
 +
 
-* Configuramos las variables de entorno, pulsando Windows + R y escribiendo sysdm.cpl:
 
-image::images/EnVar/02_PROPIEDADES_SISTEMA.PNG[title="Configuración variables de entorno Paso 1"]
+==== Instalación de Docker:
 
-* Añadimos una nueva variables de Sistema Pulsando en Variables del sistema en el botón Nueva
+* Desinstalamos versiones anteriores. Abrimos un terminal e introducimos:
++
+----
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
+----
++
 
-image::images/EnVar/02_VARIABLES_ENTORNO_VAR_ADD.PNG[title="Configuración variables de entorno Paso 2"]
+* Eliminamos imágenes, volúmenes, contenedores, configuración anteriores. Abrimos un terminal e introducimos:
++
+----
+$ sudo rm -rf /var/lib/docker
+----
++
+----
+$ sudo rm -rf /var/lib/containerd
+----
++
 
-* Añadimos la variable con el valor del JDk previamente instalado (C:\Users\tunombredeusuario\.sdkman\candidates\java\current)
+* Instalamos Docker a través de su repositorio oficial. Instalamos la fuente del apt oficial. Abrimos un terminal e introducimos:
++
+----
+$ sudo apt-get update
+----
++
+----
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+----
++
+----
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+----
++
+----
+$ echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+----
++
+* Instalamos Docker Engine. Abrimos un terminal e introducimos:
++
+----
+$ sudo apt-get update
+----
++
+----
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+----
 
-image::images/EnVar/02_VARIABLES_ENTORNO_JAVA_HOME.PNG[title="Configuración variables de entorno Paso 3"]
+* Para utilizar Docker con un usuario no root. Abrimos un terminal e introducimos:
++
+----
+$ sudo groupadd docker
+----
 
-* Añadimos la variable con el valor de Maven previamente instalado (C:\Users\tunombredeusuario\.sdkman\candidates\maven\current)
++
+----
+$ sudo usermod -aG docker $USER
+----
++
+----
+$ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+----
++
+----
+$ sudo chmod g+rwx "$HOME/.docker" -R
+----
++
+----
+$ newgrp docker
+----
 
-image::images/EnVar/02_VARIABLES_ENTORNO_M3_HOME.PNG[title="Configuración variables de entorno Paso 4"]
+==== Instalación de Docker Compose:
 
-* Añadimos las variables JAVA_HOME y M3_HOME al Path. Seleccionamos en Variables del sistema Path y pulsamos en Editar
-
-image::images/EnVar/02_VARIABLES_ENTORNO_PATH.PNG[title="Configuración variables de entorno Paso 5"]
-
-* Pulsamos en nuevo e introducimos %JAVA_HOME%\bin y %M3_HOME%\bin quedando como en la siguiente imagen:
-
-image::images/EnVar/02_VARIABLES_ENTORNO_PATH_ADD.PNG[title="Configuración variables de entorno Paso 5"]
+* Instalamos Docker Compose con pip. Abrimos un terminal e introducimos:
++
+----
+$ sudo apt install -y python3 python3-pip
+----
++
+----
+$ sudo pip3 install docker-compose
+----
++
+----
+$ docker-compose -v
+  docker-compose version 1.25.0, build unknown
+----
++
