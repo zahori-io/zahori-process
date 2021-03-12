@@ -1,4 +1,7 @@
-# Instalación Completa (para comenzar a automatizar, incluye configuración de IDE)
+# Instalación Completa
+
+Instala según esta guía para comenzar a automatizar. Incluye configuración de IDE.
+
 (https://github.com/zahori-io/zahori-process/blob/master/docs/index.adoc)
 
 # Instalación Rápida
