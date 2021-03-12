@@ -6,13 +6,13 @@ Instala según esta guía para comenzar a automatizar. Incluye configuración de
 
 # Instalación Rápida
 
-    Ver prerequisitos en el punto anterior.
+Ver prerequisitos en el punto anterior.
 
-    Arrancamos el Front End de Zahorí y el Cluster de navegadores. En zahori-process / server/start_server.sh :
+Arrancamos el Front End de Zahorí y el Cluster de navegadores. En zahori-process/server/start_server.sh :
 
-    server/start_server.sh
+    >$ server/start_server.sh
 
-    La primera vez se tiene que descargar todas las imágenes de contenedores, una vez descargado acceder a la url :
+La primera vez se tiene que descargar todas las imágenes de contenedores, una vez descargado acceder a la url :
 
-    http://localhost:9090/
+http://localhost:9090/
 
