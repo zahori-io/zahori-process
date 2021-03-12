@@ -50,14 +50,19 @@ public class SearchWikipedia extends ZahoriProcess {
 
         // Load page
         testContext.getBrowser().loadPage("https://www.wikipedia.org/");
-        testContext.logStepPassedWithScreenshot("Load Wikipedia page");
 
         WikipediaPage wiki = new WikipediaPage(testContext);
+        if (wiki.pageLoaded()) {
+            testContext.logStepPassedWithScreenshot("Page loaded");
+        }
 
         wiki.selectLanguage(language);
-        testContext.logStepPassedWithScreenshot("Select language: {0}", language);
+        testContext.logStepPassedWithScreenshot("Language selected: {0}", language);
 
         wiki.search(searchText);
         testContext.logStepPassedWithScreenshot("Search: {0}", searchText);
+
+        String firstParagraph = wiki.getFirstParagraph();
+        testContext.logStepPassed("First paragraph: {0}", firstParagraph);
     }
 }
