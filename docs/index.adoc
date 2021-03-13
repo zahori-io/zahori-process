@@ -276,7 +276,7 @@ server/start_server.sh
 * La primera vez se tiene que descargar todas las imágenes de contenedores, una vez descargado acceder a la url:
 +
 ----
-http://localhost:9090/
+http://localhost:9090/    (usuario:zahori password:zahori)
 ----
 
 image::images/012_URL_FRONTAL_ZAHORI.PNG[title="Acceso a Zahorí"]
