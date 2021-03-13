@@ -267,13 +267,13 @@ image::images/010_IDE_JETBRAINS.PNG[title="Instalación IntelliJ IDEA Paso 10"]
 
 image::images/011_IDE_JETBRAINS.PNG[title="Instalación IntelliJ IDEA Paso 11"]
 
-* Arrancamos el Front End de Zahorí y el Cluster de navegadores. En zahori-process / server/start_server.sh :
+* Para arrancar el servidor de Zahorí y el Cluster de navegadores, ejecutamos desde la carpeta zahori-process/server:
 +
 ----
 server/start_server.sh
 ----
 
-* La primera vez se tiene que descargar todas las imágenes de contenedores, una vez descargado acceder a la url :
+* La primera vez se tiene que descargar todas las imágenes de contenedores, una vez descargado acceder a la url:
 +
 ----
 http://localhost:9090/
@@ -281,13 +281,15 @@ http://localhost:9090/
 
 image::images/012_URL_FRONTAL_ZAHORI.PNG[title="Acceso a Zahorí"]
 
-* Para ejecutar en local el proceso ejecuta :
+* Para levantar el proceso en local ejecuta:
 +
 ----
 mvn spring-boot:run
 ----
 
-* Para finalizar el frontal ejecutamos en zahori-process / server/stop_server.sh :
+* Para realizar una ejecución del proceso ve al frontal de zahorí en la url indicada anteriormente, selecciona el proceso de ejemplo y realiza una nueva ejecución desde la página "Disparador"
+
+* Para finalizar el servidor ejecutamos desde la carpeta zahori-process/server:
 +
 ----
 server/stop_server.sh
