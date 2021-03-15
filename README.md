@@ -15,11 +15,11 @@ Arrancamos el servidor de Zahorí y el Cluster de navegadores. Desde la carpeta 
 
 La primera vez se que se ejecuta se tiene que descargar todas las imágenes de contenedores. Una vez arrancado acceder a la url:
 
-http://localhost:9090/
+http://localhost:9090/     (usuario:zahori password:zahori)
 
 
 
-Para ejecutar en local el proceso, ejecuta desde la carpeta raíz del proyecto:
+Para levantar el proceso en local, ejecuta desde la carpeta raíz del proyecto:
 
     >$ mvn spring-boot:run
 
