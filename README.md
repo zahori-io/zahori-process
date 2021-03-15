@@ -23,6 +23,10 @@ Para levantar el proceso en local, ejecuta desde la carpeta raíz del proyecto:
 
     >$ mvn spring-boot:run
 
+
+Para realizar una ejecución del proceso ve al frontal de zahorí en la url indicada anteriormente, selecciona el proceso de ejemplo y realiza una nueva ejecución desde la página "Disparador"
+
+
 Para parar el servidor de Zahorí pulsamos "Control + c" desde la consola donde se arrancó el servidor, o bien ejecutamos desde la carpeta zahori-process/server el script stop_server.sh:
 
     >$ cd server
