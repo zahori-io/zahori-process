@@ -5,6 +5,7 @@
 .project
 .classpath
 .settings
+nbactions.xml
 .idea/
 *.iml
 */allure-results/*

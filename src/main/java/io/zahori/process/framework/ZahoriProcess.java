@@ -23,6 +23,10 @@ package io.zahori.process.framework;
  * #L%
  */
 
+import io.zahori.framework.core.BaseProcess;
+import io.zahori.model.process.CaseExecution;
+import io.zahori.model.process.ProcessRegistration;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +42,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import io.zahori.framework.core.BaseProcess;
-import io.zahori.model.process.CaseExecution;
-import io.zahori.model.process.ProcessRegistration;
 
 /**
  *************************************************************************************
@@ -76,6 +76,9 @@ public abstract class ZahoriProcess extends BaseProcess {
     @Value("${zahori.selenoid.url}")
     private String selenoidUrl;
 
+    @Value("${zahori.server.host}")
+    private String zahoriServerHost;
+        
     @GetMapping
     public String healthcheck() {
         return super.healthcheck(name);
@@ -90,14 +93,8 @@ public abstract class ZahoriProcess extends BaseProcess {
     @EventListener
     private void onApplicationEvent(ApplicationReadyEvent event) {
         LOG.info("============== PROCESS STARTED ==============");
-
-        ServiceInstance serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
-        if (serviceInstance == null) {
-            waitZahoriServer(loadBalancer, serviceInstance);
-        }
-
-        LOG.info("Zahori server uri: {}", serviceInstance.getUri());
-        String baseUrl = serviceInstance.getUri().toString();
+        String baseUrl = getServerUrl();
+        LOG.info("Zahori server uri: {}", baseUrl);
 
         String serverStatus = new RestTemplate().getForObject(baseUrl + BaseProcess.ZAHORI_SERVER_HEALTHCHECK_URL, String.class);
         LOG.info("Zahori server status: {}", serverStatus);
@@ -111,26 +108,31 @@ public abstract class ZahoriProcess extends BaseProcess {
         LOG.info("Process registration - processId: {}", processRegistrationResponse.getBody().getProcessId());
     }
 
-    private void waitZahoriServer(LoadBalancerClient loadBalancer, ServiceInstance serviceInstance) {
+    private String getServerUrl() {
+        ServiceInstance serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
+        if (serviceInstance == null) {
+            serviceInstance = waitZahoriServer(loadBalancer);
+        }
+        String host = StringUtils.isBlank(zahoriServerHost) ? serviceInstance.getUri().getHost() : zahoriServerHost;
+        return serviceInstance.getUri().getScheme() + "://" + host + ":" + serviceInstance.getUri().getPort();
+    }
+
+    private ServiceInstance waitZahoriServer(LoadBalancerClient loadBalancer) {
+        ServiceInstance serviceInstance = null;
         LOG.warn("Zahori server seems to be down or started just a few seconds ago and is still registering in eureka server");
         for (int i = 1; i <= BaseProcess.MAX_RETRIES_WAIT_FOR_SERVER; i++) {
             LOG.warn("Waiting " + BaseProcess.SECONDS_WAIT_FOR_SERVER + " seconds before retrying again...");
             pause(BaseProcess.SECONDS_WAIT_FOR_SERVER);
             serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
+            if (serviceInstance != null){
+                return serviceInstance;
+            }
             if (serviceInstance == null && i >= BaseProcess.MAX_RETRIES_WAIT_FOR_SERVER) {
                 String errorMessage = "Timeout waiting for Zahori server. Is it started and registered in eureka?";
                 LOG.error(errorMessage);
                 throw new RuntimeException(errorMessage);
             }
         }
+        return serviceInstance;
     }
-
-    private String getServerUrl() {
-        ServiceInstance serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
-        if (serviceInstance == null) {
-            throw new RuntimeException("Zahori server not found in Eureka server");
-        }
-        return serviceInstance.getUri().toString();
-    }
-
 }

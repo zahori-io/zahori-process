@@ -11,3 +11,5 @@ docker volume create --name zahori-database --driver local
 echo Start docker-compose
 docker-compose down
 docker-compose up
+
+pause

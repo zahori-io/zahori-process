@@ -23,14 +23,18 @@ package io.zahori.process;
  * #L%
  */
 
-import org.springframework.boot.SpringApplication;
+import io.zahori.framework.core.BaseProcess;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
 public class ZahoriProcessApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(ZahoriProcessApp.class, args);
+        new SpringApplicationBuilder(ZahoriProcessApp.class)
+            .properties(BaseProcess.getProperties())
+            .build()
+            .run(args);
     }
 
 }
