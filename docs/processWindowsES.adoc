@@ -41,7 +41,7 @@ This reference for version: _{revnumber}_
 
 La documentación se ha validado con Windows 10 Profesional 64 bits.
 
-= Instalación de la herramienta de control de versiones (GIT):
+= Instalación de la herramienta de control de versiones (GIT)
 * Descarga la aplicación para un sistema de 64 bits en el siguiente enlace-> https://git-scm.com/download/win
 
 image::GIT/00_GIT.PNG[title="Descarga Git"]
@@ -81,7 +81,7 @@ $ git config --global user.email "micorreoelectronico"
 image::GIT/01_WIZARD05.PNG[title="Instalación Git Paso 4"]
 
 
-= Instalación de JDK y Maven:
+= Instalación de JDK y Maven
 
 <<<
 
@@ -158,7 +158,7 @@ Pulsamos en nuevo e introducimos %JAVA_HOME%\bin y %M3_HOME%\bin quedando como e
 
 image::EnVar/02_VARIABLES_ENTORNO_PATH_ADD.PNG[title="Configuración variables de entorno Paso 5"]
 
-= Instalación de Docker:
+= Instalación de Docker
 
 <<<
 
@@ -180,7 +180,7 @@ Una vez instalado, abre Docker Desktop, accede a settings y comprueba que la var
 
 image::Docker/05_DOCKER_DESKTOP.PNG[title="Wizard Docker"]
 
-= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition)[OPCIONAL]:
+= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition) [OPCIONAL]
 
 
 <<<
