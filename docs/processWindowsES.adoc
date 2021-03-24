@@ -20,13 +20,13 @@ This reference for version: _{revnumber}_
 |Nombre Aplicación
 |Version
 
-|git
+|Git
 |2.30.2.windows.1
 
-|jdk
+|JDK de Java
 |11.0.10.j9-adpt
 
-|maven
+|Maven
 |3.6.3
 
 |Docker
@@ -81,7 +81,7 @@ $ git config --global user.email "micorreoelectronico"
 image::GIT/01_WIZARD05.PNG[title="Instalación Git Paso 4"]
 
 
-= Instalación de JDK y Maven
+= Instalación del JDK de Java y Maven
 
 <<<
 
@@ -102,7 +102,7 @@ image::SdkMan/zip.png[title="Instalación de zip, Paso 1"]
 
 <<<
 
-Instalamos el jdk:
+Instalamos el jdk de Java:
 ----
 $  sdk install java 11.0.10.j9-adpt
 ----
