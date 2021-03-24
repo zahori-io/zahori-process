@@ -12,6 +12,7 @@
 :source-highlighter: coderay
 :docinfo: shared
 
+
 [cols=2*,options="header"]
 .Requisitos del Entorno de Desarrollo Windows 10 64 bits
 |===
