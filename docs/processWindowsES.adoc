@@ -1,6 +1,6 @@
 :imagesdir: images
 
-= Zahorí Process Doc
+= Guía de instalación en Winsows 10 de los requisitos mínimos de Zahorí
 :revdate: {docdate}
 :toc: left
 :toclevels: 3
@@ -180,7 +180,7 @@ Una vez instalado, abre Docker Desktop, accede a settings y comprueba que la var
 
 image::Docker/05_DOCKER_DESKTOP.PNG[title="Wizard Docker"]
 
-= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition):
+= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition)[OPCIONAL]:
 
 
 <<<
