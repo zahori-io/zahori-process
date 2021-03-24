@@ -1,6 +1,6 @@
 :imagesdir: images
 
-= Zahorí Process Doc Linux
+= Guía de instalación en Ubuntu 20.04 de los requisitos mínimos de Zahorí
 :revdate: {docdate}
 :toc: left
 :toclevels: 3
@@ -20,13 +20,13 @@ This reference for version: _{revnumber}_
 |Nombre Aplicación
 |Version
 
-|git
+|Git
 |2.25.1
 
-|jdk
+|JDK de Java
 |11.0.10.j9-adpt
 
-|maven
+|Maven
 |3.6.3
 
 |Docker
@@ -40,7 +40,7 @@ This reference for version: _{revnumber}_
 
 La documentación se ha validado con Ubuntu 20.04.2 LTS 64 bits.
 
-= Instalación de la herramienta de control de versiones (GIT):
+= Instalación de la herramienta de control de versiones (GIT)
 <<<
 
 En esta distribución suele venir git instalado. Abrimos un terminal y comprobamos si está instalado:
@@ -76,7 +76,7 @@ $ git config --global user.email "micorreoelectronico"
 
 
 
-= Instalación de JDK y Maven:
+= Instalación del JDK de Java y Maven
 
 <<<
 
@@ -107,7 +107,7 @@ $ sdk install maven
 
 
 
-= Instalación de Docker:
+= Instalación de Docker
 
 <<<
 
@@ -195,7 +195,7 @@ $ sudo chmod grwx "$HOME/.docker" -R
 $ newgrp docker
 ----
 
-= Instalación de Docker Compose:
+= Instalación de Docker Compose
 
 <<<
 
@@ -216,7 +216,7 @@ $ docker-compose -v
 
 
 
-= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition):
+= Instalación IDE Desarrollo (IntelliJ IDEA Community Edition) [OPCIONAL]
 
 <<<
 
