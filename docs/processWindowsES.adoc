@@ -1,6 +1,6 @@
 :imagesdir: images
 
-= Guía de instalación en Winsows 10 de los requisitos mínimos de Zahorí
+= Guía de instalación en Windows 10 de los requisitos mínimos de Zahorí
 :revdate: {docdate}
 :toc: left
 :toclevels: 3
