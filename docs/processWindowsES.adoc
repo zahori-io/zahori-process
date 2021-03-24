@@ -46,11 +46,13 @@ La documentación se ha validado con Windows 10 Profesional 64 bits.
 
 image::GIT/00_GIT.PNG[title="Descarga Git"]
 
+
 <<<
 
 Ejecuta el archivo descargado y pulsa Next:
 
 image::GIT/01_WIZARD00.PNG[title="Instalación Git Paso 1"]
+
 
 <<<
 
@@ -58,11 +60,13 @@ Deja las opciones por defecto y pulsa Next:
 
 image::GIT/01_WIZARD01.PNG[title="Instalación Git Paso 2"]
 
+
 <<<
 
 Marcamos el check Lauch Git Bash defecto y pulsamos Finish:
 
 image::GIT/01_WIZARD03.PNG[title="Instalación Git Paso 3"]
+
 
 <<<
 
@@ -87,6 +91,8 @@ Abrimos Git Bash e introducimos:
 $ curl -s "https://get.sdkman.io" | bash
 ----
 
+
+<<<
 
 SDKMan necesita zip, que no está incluído por defecto en Git Bash para Windows. Para solventar esto, accedemos a https://sourceforge.net/projects/gnuwin32/files/ y buscamos zip en el listado. Descargamos zip-3.0-bin.zip, extraemos zip.exe y lo copiamos en el directorio en el que tengamos instalado Git dentro de la carpeta \usr\bin 
 
@@ -117,11 +123,13 @@ Configuramos las variables de entorno, pulsando Windows + R y escribiendo sysdm.
 
 image::EnVar/02_PROPIEDADES_SISTEMA.PNG[title="Configuración variables de entorno Paso 1"]
 
+
 <<<
 
 Añadimos una nueva variables de Sistema Pulsando en Variables del sistema en el botón Nueva
 
 image::EnVar/02_VARIABLES_ENTORNO_VAR_ADD.PNG[title="Configuración variables de entorno Paso 2"]
+
 
 <<<
 
@@ -129,17 +137,20 @@ Añadimos la variable con el valor del JDk previamente instalado (C:\Users\tunom
 
 image::EnVar/02_VARIABLES_ENTORNO_JAVA_HOME.PNG[title="Configuración variables de entorno Paso 3"]
 
+
 <<<
 
 Añadimos la variable con el valor de Maven previamente instalado (C:\Users\tunombredeusuario\.sdkman\candidates\maven\current)
 
 image::EnVar/02_VARIABLES_ENTORNO_M3_HOME.PNG[title="Configuración variables de entorno Paso 4"]
 
+
 <<<
 
 Añadimos las variables JAVA_HOME y M3_HOME al Path. Seleccionamos en Variables del sistema Path y pulsamos en Editar
 
 image::EnVar/02_VARIABLES_ENTORNO_PATH.PNG[title="Configuración variables de entorno Paso 5"]
+
 
 <<<
 
@@ -148,17 +159,20 @@ Pulsamos en nuevo e introducimos %JAVA_HOME%\bin y %M3_HOME%\bin quedando como e
 image::EnVar/02_VARIABLES_ENTORNO_PATH_ADD.PNG[title="Configuración variables de entorno Paso 5"]
 
 = Instalación de Docker:
+
 <<<
 
 Descarga la aplicación en según el sistema de tu sistema operativo (64 / 32 bits) en el siguiente enlace-> https://www.docker.com/products/docker-desktop
 
 image::Docker/03_DOCKER_DESCARGA.PNG[title="Descarga Docker"]
 
+
 <<<
 
 Ejecuta el instalador, pulsando en siguiente hasta completar la instalación. Recomendamos marcar en el wizard las siguientes opciones:
 
 image::Docker/03_DOCKER_WIZARD00.PNG[title="Wizard Docker"]
+
 
 <<<
 
@@ -168,15 +182,20 @@ image::Docker/05_DOCKER_DESKTOP.PNG[title="Wizard Docker"]
 
 = Instalación IDE Desarrollo (IntelliJ IDEA Community Edition):
 
-* Descarga la aplicación en según el sistema de tu sistema operativo (64 / 32 bits) en el siguiente enlace-> https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=windows
+
+<<<
+
+Descarga la aplicación en según el sistema de tu sistema operativo (64 / 32 bits) en el siguiente enlace-> https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=windows
 
 image::IDEA/04_IDE_JETBRAINS00.PNG[title="Instalación IntelliJ IDEA Paso 1"]
+
 
 <<<
 
 Ejecutamos el instalador, pulsamos Instalar:
 
 image::IDEA/04_IDE_JETBRAINS01.PNG[title="Instalación IntelliJ IDEA Paso 2"]
+
 
 <<<
 
@@ -191,6 +210,7 @@ La aplicación estará en la barra de tareas de Windows en la zona inferior dere
 
 image::IDEA/04_IDE_JETBRAINS03.PNG[title="Instalación IntelliJ IDEA Paso 4"]
 
+
 <<<
 
 Pulsamos con el botón derecho sobre el icono de IntelliJ IDEA y pulsamos en Open Toolbox :
@@ -203,6 +223,7 @@ image::IDEA/04_IDE_JETBRAINS04.PNG[title="Instalación IntelliJ IDEA Paso 5"]
 Aceptamos los términos:
 
 image::IDEA/04_IDE_JETBRAINS05.PNG[title="Instalación IntelliJ IDEA Paso 6"]
+
 
 <<<
 
@@ -235,17 +256,20 @@ https://github.com/zahori-io/zahori-process.git
 
 image::IDEA/04_IDE_JETBRAINS09.PNG[title="Instalación IntelliJ IDEA Paso 10"]
 
+
 <<<
 
 Vamos a la configuración del Proyecto. Pulsamos Menú File / Project Structure:
 
 image::IDEA/04_IDE_JETBRAINS010.PNG[title="Instalación IntelliJ IDEA Paso 11"]
 
+
 <<<
 
 Añadimos el JDK previamente instalado. Project Settings / Project / Project SDK / Add JDK:
 
 image::IDEA/04_IDE_JETBRAINS011.PNG[title="Instalación IntelliJ IDEA Paso 12"]
+
 
 <<<
 
@@ -258,17 +282,20 @@ C:\Users\tuNombreDeUsuario\.sdkman\candidates\java/11.0.10.j9-adpt
 
 image::IDEA/04_IDE_JETBRAINS012.PNG[title="Instalación IntelliJ IDEA Paso 13"]
 
+
 <<<
 
 Vamos a la configuración General del Proyecto a configurar Maven. Menú File / Settings ...:
 
 image::IDEA/04_IDE_JETBRAINS013.PNG[title="Instalación IntelliJ IDEA Paso 14"]
 
+
 <<<
 
 En el cuadro de búsqueda escribimos maven. Build, Execution, Deployment / Build Tools / Maven / Maven home path . Pulsamos en el botón indicado en la imagen:
 
 image::IDEA/04_IDE_JETBRAINS014.PNG[title="Instalación IntelliJ IDEA Paso 15"]
+
 
 <<<
 
@@ -280,6 +307,7 @@ C:\Users\tuNombreDeUsuario\.sdkman\candidates\maven\3.6.3
 ----
 
 image::IDEA/04_IDE_JETBRAINS015.PNG[title="Instalación IntelliJ IDEA Paso 16"]
+
 
 <<<
 
@@ -309,11 +337,13 @@ cd server
 
 image::IDEA/04_IDE_JETBRAINS017.PNG[title="Instalación IntelliJ IDEA Paso 18"]
 
+
 <<<
 
 Durante la carga el firewall de windows bloqueará la ejecución del JDK. Permitimos acceso para poder continuar
 
 image::IDEA/04_IDE_JETBRAINS024.PNG[title="Instalación IntelliJ IDEA Paso 19"]
+
 
 <<<
 
@@ -324,6 +354,7 @@ http://localhost:9090/    (usuario:zahori password:zahori)
 ----
 
 image::ZAHORI/012_URL_FRONTAL_ZAHORI.png[title="Acceso a Zahorí"]
+
 
 <<<
 
@@ -336,6 +367,7 @@ image::IDEA/04_IDE_JETBRAINS023.PNG[title="Levantamos el proceso"]
 mvn spring-boot:run
 ----
 
+
 <<<
 
 Para realizar una ejecución del proceso ve al frontal de zahorí en la url indicada anteriormente, selecciona el proceso de ejemplo y realiza una nueva ejecución desde la página "Disparador"
@@ -343,6 +375,7 @@ Para realizar una ejecución del proceso ve al frontal de zahorí en la url indi
 image::ZAHORI/013_URL_FRONTAL_ZAHORI.png[title="Configurar disparador"]
 
 image::ZAHORI/014_URL_FRONTAL_ZAHORI.png[title="Resultado ejecución"]
+
 
 <<<
 
@@ -354,6 +387,3 @@ image::IDEA/04_IDE_JETBRAINS022.PNG[title="Paramos servidor desde InteliJ"]
 cd server
 ./stop_server.bat
 ----
-
-
-
