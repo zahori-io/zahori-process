@@ -47,6 +47,10 @@
 
 		<license.licenseName>agpl_v3</license.licenseName>
 		<license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
+
+		<sonar.projectKey>zahori-io_zahori-process</sonar.projectKey>
+		<sonar.organization>zahoriio</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<scm>
@@ -68,7 +72,7 @@
 			<dependency>
 				<groupId>io.zahori</groupId>
 				<artifactId>zahori-framework</artifactId>
-				<version>0.1.7</version>
+				<version>0.1.8</version>
 			</dependency>
 			<dependency>
 				<groupId>io.zahori</groupId>
@@ -253,6 +257,10 @@
 						<arg>-Xlint:unchecked</arg>
 						<arg>-Xlint:deprecation</arg>
 					</compilerArgs>
+					<!-- Veracode -->
+					<debug>true</debug>
+					<debuglevel>lines,vars,source</debuglevel>
+					<!-- FIN Veracode -->
 				</configuration>
 			</plugin>
 			<plugin>
