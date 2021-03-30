@@ -37,7 +37,6 @@ public class WikipediaPage extends Page {
     }
 
     public String getFirstParagraph() {
-        PageElement firstParagraph = new PageElement(this, "First paragraph", Locator.xpath("//*[@id='mw-content-text']/div/p[1]"));
         return firstParagraph.getText();
     }
 
