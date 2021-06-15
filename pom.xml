@@ -305,42 +305,6 @@
 					</execution>
 				</executions>
 			</plugin>
-                        <!--
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>2.8.0</version>
-				<configuration>
-					<from>
-						<image>docker.io/adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.10_9</image>
-					</from>
-					<to>
-						<image>docker.io/zahoriaut/${project.artifactId}</image>
-						<credHelper>pass</credHelper>
-						<tags>
-							<tag>${project.version}</tag>
-						</tags>
-					</to>
-					<container>
-						<mainClass>${start-class}</mainClass>
-						<ports>
-							<port>9091</port>
-						</ports>
-						<jvmFlags>
-							<jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
-						</jvmFlags>
-					</container>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-                        -->
 		</plugins>
 	</build>
 
@@ -482,6 +446,47 @@
 								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>build-container</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>3.1.1</version>
+						<configuration>
+							<from>
+								<image>docker.io/adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.10_9</image>
+							</from>
+							<to>
+								<image>docker.io/zahoriaut/${project.artifactId}</image>
+								<credHelper>pass</credHelper>
+								<tags>
+									<tag>${project.version}</tag>
+								</tags>
+							</to>
+							<container>
+								<mainClass>${start-class}</mainClass>
+								<ports>
+									<port>9091</port>
+								</ports>
+								<jvmFlags>
+									<jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+								</jvmFlags>
+							</container>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
 								</goals>
 							</execution>
 						</executions>
