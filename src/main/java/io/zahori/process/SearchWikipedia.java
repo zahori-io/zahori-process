@@ -49,7 +49,7 @@ public class SearchWikipedia extends ZahoriProcess {
         String searchText = data.get("Search");
 
         // Load page
-        String url = testContext.getProjectProperty("url.wikipedia");
+        String url = caseExecution.getConfiguration().getEnvironmentUrl();
         testContext.getBrowser().loadPage(url);
 
         WikipediaPage wiki = new WikipediaPage(testContext);
