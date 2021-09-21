@@ -58,12 +58,12 @@ public class SearchWikipedia extends ZahoriProcess {
         }
 
         wiki.selectLanguage(language);
-        testContext.logStepPassedWithScreenshot("Language selected: {0}", language);
+        testContext.logStepPassedWithScreenshot("Language selected: {}", language);
 
         wiki.search(searchText);
-        testContext.logStepPassedWithScreenshot("Search: {0}", searchText);
+        testContext.logStepPassedWithScreenshot("Search: {}", searchText);
 
         String firstParagraph = wiki.getFirstParagraph();
-        testContext.logStepPassed("First paragraph: {0}", firstParagraph);
+        testContext.logStepPassed("First paragraph: {}", firstParagraph);
     }
 }
