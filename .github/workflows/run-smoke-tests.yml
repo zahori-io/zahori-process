@@ -1,0 +1,29 @@
+name: Run Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      service-name:
+        description: "Name of the service triggering the workflow"
+        required: false
+
+jobs:
+  run-tests:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          cache: 'pip'
+      - name: install dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: Run smoke tests
+        env:
+          ZAHORI_USER: zahori
+          ZAHORI_PASSWORD: ${{secrets.ZAHORI_PASSWORD}}
+          ZAHORI_SERVER: demo.com
+        run: |
+          python scripts/smoke_tests.py
