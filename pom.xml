@@ -73,7 +73,7 @@
 			<dependency>
 				<groupId>io.zahori</groupId>
 				<artifactId>zahori-framework</artifactId>
-				<version>0.1.16</version>
+				<version>0.1.18</version>
 			</dependency>
 
 			<dependency>
