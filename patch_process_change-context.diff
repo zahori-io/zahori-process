@@ -1,0 +1,57 @@
+diff --git a/src/main/java/io/zahori/process/framework/ZahoriProcess.java b/src/main/java/io/zahori/process/framework/ZahoriProcess.java
+index d885977..e8340b3 100755
+--- a/src/main/java/io/zahori/process/framework/ZahoriProcess.java
++++ b/src/main/java/io/zahori/process/framework/ZahoriProcess.java
+@@ -76,9 +76,9 @@ public abstract class ZahoriProcess extends BaseProcess {
+     @Value("${zahori.selenoid.url}")
+     private String selenoidUrl;
+ 
+-    @Value("${zahori.server.host}")
++    @Value("${zahori.server.host:}")
+     private String zahoriServerHost;
+-        
++
+     @GetMapping
+     public String healthcheck() {
+         return super.healthcheck(name);
+@@ -109,12 +109,16 @@ public abstract class ZahoriProcess extends BaseProcess {
+     }
+ 
+     private String getServerUrl() {
++        if (!StringUtils.isBlank(zahoriServerHost)) {
++            return zahoriServerHost;
++        }
++
+         ServiceInstance serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
+         if (serviceInstance == null) {
+             serviceInstance = waitZahoriServer(loadBalancer);
+         }
+-        String host = StringUtils.isBlank(zahoriServerHost) ? serviceInstance.getUri().getHost() : zahoriServerHost;
+-        return serviceInstance.getUri().getScheme() + "://" + host + ":" + serviceInstance.getUri().getPort();
++
++        return serviceInstance.getUri().toString() + "/zahori";
+     }
+ 
+     private ServiceInstance waitZahoriServer(LoadBalancerClient loadBalancer) {
+@@ -124,7 +128,7 @@ public abstract class ZahoriProcess extends BaseProcess {
+             LOG.warn("Waiting " + BaseProcess.SECONDS_WAIT_FOR_SERVER + " seconds before retrying again...");
+             pause(BaseProcess.SECONDS_WAIT_FOR_SERVER);
+             serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
+-            if (serviceInstance != null){
++            if (serviceInstance != null) {
+                 return serviceInstance;
+             }
+             if (serviceInstance == null && i >= BaseProcess.MAX_RETRIES_WAIT_FOR_SERVER) {
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+index 115207c..d48628a 100755
+--- a/src/main/resources/application.properties
++++ b/src/main/resources/application.properties
+@@ -27,7 +27,7 @@ eureka.client.eureka-service-url-poll-interval-seconds=15
+ 
+ ############## ZAHORI SERVER ##############
+ #Uncomment this property to override the server IP returned by Eureka server
+-zahori.server.host=localhost
++#zahori.server.host=http://localhost:9090
+ 
+ ############## LOGGING ############## 
+ # Level

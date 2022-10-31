@@ -76,9 +76,9 @@ public abstract class ZahoriProcess extends BaseProcess {
     @Value("${zahori.selenoid.url}")
     private String selenoidUrl;
 
-    @Value("${zahori.server.host}")
+    @Value("${zahori.server.host:}")
     private String zahoriServerHost;
-        
+
     @GetMapping
     public String healthcheck() {
         return super.healthcheck(name);
@@ -109,12 +109,16 @@ public abstract class ZahoriProcess extends BaseProcess {
     }
 
     private String getServerUrl() {
+        if (!StringUtils.isBlank(zahoriServerHost)) {
+            return zahoriServerHost;
+        }
+
         ServiceInstance serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
         if (serviceInstance == null) {
             serviceInstance = waitZahoriServer(loadBalancer);
         }
-        String host = StringUtils.isBlank(zahoriServerHost) ? serviceInstance.getUri().getHost() : zahoriServerHost;
-        return serviceInstance.getUri().getScheme() + "://" + host + ":" + serviceInstance.getUri().getPort();
+
+        return serviceInstance.getUri().toString() + "/zahori";
     }
 
     private ServiceInstance waitZahoriServer(LoadBalancerClient loadBalancer) {
@@ -124,7 +128,7 @@ public abstract class ZahoriProcess extends BaseProcess {
             LOG.warn("Waiting " + BaseProcess.SECONDS_WAIT_FOR_SERVER + " seconds before retrying again...");
             pause(BaseProcess.SECONDS_WAIT_FOR_SERVER);
             serviceInstance = loadBalancer.choose(BaseProcess.ZAHORI_SERVER_SERVICE_NAME);
-            if (serviceInstance != null){
+            if (serviceInstance != null) {
                 return serviceInstance;
             }
             if (serviceInstance == null && i >= BaseProcess.MAX_RETRIES_WAIT_FOR_SERVER) {
