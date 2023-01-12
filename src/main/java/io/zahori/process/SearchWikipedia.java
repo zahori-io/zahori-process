@@ -28,8 +28,8 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.zahori.framework.core.TestContext;
+import io.zahori.framework.core.ZahoriProcess;
 import io.zahori.model.process.CaseExecution;
-import io.zahori.process.framework.ZahoriProcess;
 import io.zahori.process.pages.WikipediaPage;
 
 @RestController
