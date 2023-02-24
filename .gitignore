@@ -1,6 +1,7 @@
 /target
 /test-output
 /bin
+/logs
 *.class
 .project
 .classpath
