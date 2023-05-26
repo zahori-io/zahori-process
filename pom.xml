@@ -32,13 +32,6 @@
 
     <inceptionYear>2021</inceptionYear>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.11</version>
-        <relativePath />
-    </parent>
-	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
@@ -51,7 +44,14 @@
         <sonar.organization>zahoriio</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <selenium.version>4.8.1</selenium.version>
+        <selenium.version>4.9.1</selenium.version>
+        <spring-boot.version>3.0.6</spring-boot.version>
+        <spring-cloud.version>2022.0.2</spring-cloud.version>
+
+        <docker.hub.name>docker.io/zahoriaut</docker.hub.name>
+<!--        <kubernetes-spring-starter.version>3.5.3</kubernetes-spring-starter.version>-->
+        <zahori-framework.version>0.2.10</zahori-framework.version>
+
     </properties>
 
     <scm>
@@ -67,21 +67,112 @@
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.zahori</groupId>
+                <artifactId>zahori-framework</artifactId>
+                <version>${zahori-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-opera-driver</artifactId>
+                <version>4.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>5.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <type>pom</type>
+                <version>${spring-boot.version}</version>
+                <scope>import</scope>
+            </dependency>
+            <!--
+
+            <dependency>
+                <groupId>io.dekorate</groupId>
+                <artifactId>kubernetes-spring-starter</artifactId>
+                <version>${kubernetes-spring-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.dekorate</groupId>
+                <artifactId>jib-annotations</artifactId>
+                <version>3.5.3</version>
+            </dependency>
+            -->
+        </dependencies>
+    </dependencyManagement>
 	
     <dependencies>
 
         <dependency>
             <groupId>io.zahori</groupId>
             <artifactId>zahori-framework</artifactId>
-            <version>0.2.6</version>
+        </dependency>
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-safari-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-ie-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-edge-driver</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-opera-driver</artifactId>
-            <version>4.4.0</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+        </dependency>
+        <!-- FIN Selenium -->
+        <!--
+        <dependency>
+           <groupId>io.dekorate</groupId>
+           <artifactId>kubernetes-spring-starter</artifactId>
+        </dependency>
+
+        <dependency>
+           <groupId>io.dekorate</groupId>
+           <artifactId>jib-annotations</artifactId>
+        </dependency>
+         -->
     </dependencies>
 
     <build>
@@ -97,13 +188,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <inherited>true</inherited>
                 <configuration>
                     <source>${java.version}</source>
@@ -121,6 +215,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
@@ -128,6 +223,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
+                <version>2.15.0</version>
             </plugin>
 
             <plugin>
@@ -144,11 +240,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <configuration>
+                    <excludeDevtools>false</excludeDevtools>
                     <executable>true</executable>
-                    <finalName>app</finalName>
+<!--                    <finalName>app</finalName>-->
                     <image>
-                        <name>docker.io/zahoriaut/${project.artifactId}:${project.version}</name>
+                        <name>${docker.hub.name}/${project.artifactId}:${project.version}</name>
                     </image>
                     <layers>
                         <enabled>true</enabled>
@@ -166,6 +264,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+              <configuration>
+                    &lt;!&ndash; imageName is used to set the name of the generated binary file &ndash;&gt;
+                    <imageName>${project.artifactId}</imageName>
+                    &lt;!&ndash; mainClass is used to specify the path to the main method class &ndash;&gt;
+                    <mainClass>${start-class}</mainClass>
+                    <buildArgs>
+                        &#45;&#45;no-fallback
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-native</id>
+                        <goals>
+                            <goal>compile-no-fork</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+             -->
         </plugins>
     </build>
 
@@ -176,7 +298,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.5.0</version>
+                        <version>3.6.0</version>
                         <executions>
                             <execution>
                                 <id>analyze</id>
@@ -271,7 +393,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -321,10 +443,10 @@
                     <plugin>
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>3.3.2</version>
                         <configuration>
                             <from>
-                                <image>docker.io/adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.10_9</image>
+                                <image>maven:3.9.0-eclipse-temurin-17-alpine</image>
                             </from>
                             <to>
                                 <image>docker.io/zahoriaut/${project.artifactId}</image>
@@ -336,10 +458,10 @@
                             <container>
                                 <mainClass>${start-class}</mainClass>
                                 <ports>
-                                    <port>9091</port>
+                                    <port>8765</port>
                                 </ports>
                                 <jvmFlags>
-                                    <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                                    <jvmFlag>-XX:+UseContainerSupport</jvmFlag>
                                 </jvmFlags>
                             </container>
                         </configuration>
@@ -348,6 +470,84 @@
                                 <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>kubernetes</id>
+            <properties>
+                <!--                <jkube.build.strategy>jib</jkube.build.strategy>-->
+                <jkube.generator.name>${docker.hub.name}/${project.artifactId}:${project.version}</jkube.generator.name>
+                <!--<jkube.enricher.jkube-namespace.namespace>zahori</jkube.enricher.jkube-namespace.namespace>-->
+                <jkube.namespace>zahori</jkube.namespace>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jkube</groupId>
+                        <artifactId>kubernetes-maven-plugin</artifactId>
+                        <version>1.12.0</version>
+                        <configuration>
+                            <namespace>zahori</namespace>
+
+                            <generator>
+                                <includes>
+                                    <include>spring-boot</include>
+                                </includes>
+                                <config>
+                                    <spring-boot>
+                                        <color>always</color>
+                                    </spring-boot>
+                                </config>
+                            </generator>
+                            <enricher>
+                                <excludes>
+                                    <exclude>jkube-expose</exclude>
+                                </excludes>
+                                <config>
+                                    <jkube-service>
+                                        <type>ClusterIP</type>
+                                    </jkube-service>
+                                </config>
+                            </enricher>
+                            <remoteDevelopment>
+                                <localServices>
+                                    <localService>
+                                        <serviceName>${project.artifactId}</serviceName>
+                                        <port>8765</port>
+                                    </localService>
+                                </localServices>
+                                <remoteServices>
+                                    <remoteService>
+                                        <hostname>openzahori-consul-service</hostname>
+                                        <port>8500</port>
+                                    </remoteService>
+                                    <remoteService>
+                                        <hostname>openzahori-zahori</hostname>
+                                        <port>9090</port>
+                                    </remoteService>
+                                    <remoteService>
+                                        <hostname>moon.moon.svc.cluster.local</hostname>
+                                        <port>4444</port>
+                                    </remoteService>
+                                    <remoteService>
+                                        <hostname>moon.moon.svc.cluster.local</hostname>
+                                        <port>8080</port>
+                                    </remoteService>
+                                </remoteServices>
+                            </remoteDevelopment>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resource</goal>
+                                    <!--                                    <goal>build</goal>-->
+                                    <goal>helm</goal>
                                 </goals>
                             </execution>
                         </executions>
