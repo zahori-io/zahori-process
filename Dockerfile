@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM maven:3.9.0-eclipse-temurin-17-alpine as javabuilder
+FROM maven:3.9.3-eclipse-temurin-17-alpine as javabuilder
 
 WORKDIR /code
 COPY pom.xml ./
@@ -9,7 +9,7 @@ COPY src /code/src
 RUN mvn clean package
 
 # Etapa de ejecución
-FROM eclipse-temurin:17.0.6_10-jre-alpine
+FROM eclipse-temurin:17.0.7_7-jre-alpine
 
 # Crear grupo y usuario no privilegiado "zahori"
 #RUN addgroup -S zahori && adduser -S zahori -G zahori
