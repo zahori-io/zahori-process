@@ -4,7 +4,7 @@
 
     <groupId>io.zahori</groupId>
     <artifactId>zahori-process</artifactId>
-    <version>0.1.13</version>
+    <version>0.1.14-SNAPSHOT</version>
     <name>zahori-process</name>
     <description>Example of automated process using Zahori.io</description>
     <url>https://zahori.io</url>
@@ -58,7 +58,7 @@
         <connection>scm:git:git://github.com/zahori-io/zahori-process.git</connection>
         <developerConnection>scm:git:git@github.com:zahori-io/zahori-process.git</developerConnection>
         <url>https://github.com/zahori-io/zahori-process.git</url>
-        <tag>v0.1.13</tag>
+        <tag>v0.1.0</tag>
     </scm>
 
     <distributionManagement>
