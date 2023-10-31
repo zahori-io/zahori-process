@@ -9,7 +9,7 @@ COPY src /code/src
 RUN mvn clean package
 
 # Etapa de ejecución
-FROM eclipse-temurin:17.0.7_7-jre-alpine
+FROM eclipse-temurin:17.0.9_9-jre-alpine
 
 # Crear grupo y usuario no privilegiado "zahori"
 #RUN addgroup -S zahori && adduser -S zahori -G zahori
