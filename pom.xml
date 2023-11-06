@@ -50,7 +50,7 @@
 
         <docker.hub.name>docker.io/zahoriaut</docker.hub.name>
         <!--        <kubernetes-spring-starter.version>3.5.3</kubernetes-spring-starter.version>-->
-        <zahori-framework.version>0.2.12</zahori-framework.version>
+        <zahori-framework.version>0.2.13</zahori-framework.version>
 
     </properties>
 
