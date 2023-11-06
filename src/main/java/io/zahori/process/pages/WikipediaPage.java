@@ -31,7 +31,7 @@ public class WikipediaPage extends Page {
     private static final long serialVersionUID = -8823897590918241825L;
 
     private PageElement searchField = new PageElement(this, "Search field", Locator.name("search"));
-    private PageElement firstParagraph = new PageElement(this, "First paragraph", Locator.xpath("//*[@id='mw-content-text']/div/p[1]"));
+    private PageElement firstParagraph = new PageElement(this, "First paragraph", Locator.xpath("//*[@id='mw-content-text']/div/p[not(contains(@class,'mw-empty-elt'))][1]"));
 
     public WikipediaPage(io.zahori.framework.core.TestContext testContext) {
         super(testContext);
