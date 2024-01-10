@@ -199,7 +199,6 @@
                     <goals>deploy</goals>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -207,9 +206,7 @@
                 <configuration>
                     <excludeDevtools>false</excludeDevtools>
                     <executable>true</executable>
-            -->
                     <!--                    <finalName>app</finalName>-->
-            <!--
                     <image>
                         <name>${docker.hub.name}/${project.artifactId}:${project.version}</name>
                     </image>
@@ -229,40 +226,30 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
-
-            <!-- 
-                https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
-                ./mvnw clean -Pnative spring-boot:build-image
-            -->
+            <!--
             <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>0.9.28</version>
-                <configuration>
-                    <metadataRepository>
-                        <enabled>true</enabled>
-                    </metadataRepository>
-                </configuration>
+               <groupId>org.graalvm.buildtools</groupId>
+               <artifactId>native-maven-plugin</artifactId>
+             <configuration>
+                   &lt;!&ndash; imageName is used to set the name of the generated binary file &ndash;&gt;
+                   <imageName>${project.artifactId}</imageName>
+                   &lt;!&ndash; mainClass is used to specify the path to the main method class &ndash;&gt;
+                   <mainClass>${start-class}</mainClass>
+                   <buildArgs>
+                       &#45;&#45;no-fallback
+                   </buildArgs>
+               </configuration>
+               <executions>
+                   <execution>
+                       <id>build-native</id>
+                       <goals>
+                           <goal>compile-no-fork</goal>
+                       </goals>
+                       <phase>package</phase>
+                   </execution>
+               </executions>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.5</version>
-                <configuration>
-                    <image>
-                        <name>zahoriaut/${project.artifactId}:${project.version}</name>
-                    </image>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!-- goal>repackage</goal -->
-                            <goal>build-image</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            -->
         </plugins>
     </build>
 
