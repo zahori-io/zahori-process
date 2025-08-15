@@ -50,7 +50,7 @@
 
         <docker.hub.name>docker.io/zahoriaut</docker.hub.name>
         <!--        <kubernetes-spring-starter.version>3.5.3</kubernetes-spring-starter.version>-->
-        <zahori-framework.version>0.2.15</zahori-framework.version>
+        <zahori-framework.version>0.2.16.12_appium</zahori-framework.version>
 
     </properties>
 
@@ -277,7 +277,7 @@
                                 <id>enforce</id>
                                 <configuration>
                                     <rules>
-                                        <DependencyConvergence />
+                                        <DependencyConvergence/>
                                         <requireMavenVersion>
                                             <version>3.6.3</version>
                                         </requireMavenVersion>
