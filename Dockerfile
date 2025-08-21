@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM maven:3.9.6-eclipse-temurin-17-alpine as javabuilder
+FROM maven:3.9.11-eclipse-temurin-17-alpine as javabuilder
 
 WORKDIR /code
 COPY pom.xml ./
