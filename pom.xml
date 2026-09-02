@@ -152,7 +152,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.16.0</version>
                 <inherited>true</inherited>
                 <configuration>
                     <source>${java.version}</source>
